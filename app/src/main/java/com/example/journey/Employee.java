@@ -2,9 +2,22 @@ package com.example.journey;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Employees")
+@Entity(tableName = "Employees",
+        foreignKeys = {
+        @ForeignKey(entity=TravelAgency.class,
+        parentColumns = "AgencyId",
+        childColumns = "EmployeeAgencyId",
+        onDelete = ForeignKey.CASCADE,
+        onUpdate = ForeignKey.CASCADE),
+        @ForeignKey(entity=PackageTravel.class,
+        parentColumns = "PackageId",
+        childColumns = "EmployeePackageId",
+        onDelete = ForeignKey.CASCADE,
+        onUpdate = ForeignKey.CASCADE)})
+
 public class Employee {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name= "Eid")
