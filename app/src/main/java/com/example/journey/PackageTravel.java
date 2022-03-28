@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 @Entity (tableName = "Packages")
 public class PackageTravel {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name= "PackageId")
     public int id;
     @ColumnInfo(name= "PackageCity")

@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey;
 
 @Entity (tableName = "TAgency")
 public class TravelAgency {
-    @PrimaryKey @ColumnInfo(name= "AgencyId")
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name= "AgencyId")
     public int id;
     @ColumnInfo(name= "AgencyName")
     public String agency_name;
