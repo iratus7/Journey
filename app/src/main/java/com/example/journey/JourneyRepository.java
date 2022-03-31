@@ -13,5 +13,6 @@ public class JourneyRepository {
         journeyDatabase = Room.databaseBuilder(context,JourneyDatabase.class,DB_NAME).allowMainThreadQueries().build();
 
         Toast.makeText(context,"Database created...",Toast.LENGTH_LONG).show();
+
     }
 }

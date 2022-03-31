@@ -6,7 +6,8 @@ import androidx.room.Room;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
-    public static JourneyDatabase myAppDatabase;
+    public static JourneyDatabase journeyDatabase;
+    private String DB_NAME = "journeydb";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,10 +15,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //JourneyRepository journeyRepository =new JourneyRepository(getApplicationContext());
-        myAppDatabase = Room.databaseBuilder(getApplicationContext(),JourneyDatabase.class,"journeydb").allowMainThreadQueries().build();
+        journeyDatabase = Room.databaseBuilder(getApplicationContext(),JourneyDatabase.class,DB_NAME).allowMainThreadQueries().build();
 
-
-
+        TravelAgency travelAgency1 = new TravelAgency(2,"hermes","dragoymi");
+        MainActivity.journeyDatabase.journeyDao().insertTravelAgency(travelAgency1);
 
     }
 }
