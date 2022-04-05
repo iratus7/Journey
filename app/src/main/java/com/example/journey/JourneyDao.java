@@ -2,7 +2,10 @@ package com.example.journey;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.Query;
 import androidx.room.Update;
+
+import java.util.List;
 
 @Dao
 public interface JourneyDao {
@@ -24,5 +27,9 @@ public interface JourneyDao {
     void deleteTrip(Trip trip);
     @Delete
     void deletePackageTravel(PackageTravel packageTravel);
+
+
+//    @Query("SELECT * FROM TAgency")
+//    List<MainData> getAll();
 
 }

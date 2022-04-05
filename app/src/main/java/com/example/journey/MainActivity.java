@@ -41,33 +41,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //TravelAgency travelAgency1 = new TravelAgency(2,"hermes","dragoymi");
         //MainActivity.journeyDatabase.journeyDao().insertTravelAgency(travelAgency1);
 
-//        if (savedInstanceState == null) {
-//            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
-//            navigationView.setCheckedItem(R.id.nav_home);
-//        }
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new HomeFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new HomeFragmentR()).commit();
+            navigationView.setCheckedItem(R.id.nav_home);
+        }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.nav_home:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new HomeFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new HomeFragmentR()).commit();
+                break;
+
+            case R.id.nav_travelagency:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new TravelAgencyFragmentActions()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new TravelAgencyFragmentResults()).commit();
                 break;
 
 //            case R.id.nav_home:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new HomeFragment()).commit();
 //                break;
 //
 //            case R.id.nav_home:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new HomeFragment()).commit();
 //                break;
 //
 //            case R.id.nav_home:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new HomeFragment()).commit();
 //                break;
 //
 //            case R.id.nav_home:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new HomeFragment()).commit();
 //                break;
 
 
