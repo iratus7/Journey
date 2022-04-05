@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showin="Navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_trip"
+            android:icon="@drawable/ic_trip"
+            android:title="Trip" />
+        <item
+            android:id="@+id/nav_travelagency"
+            android:icon="@drawable/ic_travelagency"
+            android:title="TravelAgency" />
+
+        <item
+            android:id="@+id/nav_customers"
+            android:icon="@drawable/ic_customers"
+            android:title="Customers" />
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_search"
+            android:title="Search" />
+    </group>
+
+    <!--<item android:title="Online">-->
+    <!--    <menu>-->
+
+    <!--    </menu>-->
+    <!--</item>-->
+</menu>
