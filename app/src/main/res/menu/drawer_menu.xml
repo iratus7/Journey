@@ -15,7 +15,10 @@
             android:id="@+id/nav_travelagency"
             android:icon="@drawable/ic_travelagency"
             android:title="@string/travelagency" />
-
+        <item
+            android:id="@+id/nav_packets"
+            android:icon="@drawable/ic_packets"
+            android:title="@string/packets" />
         <item
             android:id="@+id/nav_customers"
             android:icon="@drawable/ic_customers"
