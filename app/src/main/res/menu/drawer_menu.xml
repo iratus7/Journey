@@ -6,24 +6,24 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
-            android:title="Home" />
+            android:title="@string/home" />
         <item
             android:id="@+id/nav_trip"
             android:icon="@drawable/ic_trip"
-            android:title="Trip" />
+            android:title="@string/trip" />
         <item
             android:id="@+id/nav_travelagency"
             android:icon="@drawable/ic_travelagency"
-            android:title="TravelAgency" />
+            android:title="@string/travelagency" />
 
         <item
             android:id="@+id/nav_customers"
             android:icon="@drawable/ic_customers"
-            android:title="Customers" />
+            android:title="@string/customers" />
         <item
             android:id="@+id/nav_search"
             android:icon="@drawable/ic_search"
-            android:title="Search" />
+            android:title="@string/search" />
     </group>
 
     <!--<item android:title="Online">-->

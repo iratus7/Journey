@@ -2,5 +2,10 @@
     <string name="app_name">Journey</string>
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
+    <string name="home">Home</string>
+    <string name="trip">Trip</string>
+    <string name="travelagency">TravelAgency</string>
+    <string name="customers">Customers</string>
+    <string name="search">Search</string>
 
 </resources>
