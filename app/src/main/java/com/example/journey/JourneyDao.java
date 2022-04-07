@@ -29,7 +29,7 @@ public interface JourneyDao {
     void deletePackageTravel(PackageTravel packageTravel);
 
 
-//    @Query("SELECT * FROM TAgency")
-//    List<MainData> getAll();
+    @Query("SELECT * FROM TAgency")
+    List<TravelAgency> getTravelAgency();
 
 }
