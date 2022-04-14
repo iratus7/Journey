@@ -13,7 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.util.List;
+import java.util.Objects;
+
 
 public class TravelAgencyFragmentActions extends Fragment {
     EditText editTextAgency,editTextAddress;
@@ -33,14 +34,14 @@ public class TravelAgencyFragmentActions extends Fragment {
         public void onClick(View v) {
             String uText = editTextAgency.getText().toString().trim();
             String uTextA = editTextAddress.getText().toString().trim();
-            if (!uText.equals("")||!uTextA.equals("")) {
+            if (!uText.equals("")&&!uTextA.equals("")) {
                 TravelAgency travelAgency = new TravelAgency(uText, uTextA);
                 JourneyDatabase.getInstance(getContext()).journeyDao().insertTravelAgency(travelAgency);
                 Toast toast = Toast.makeText(getContext(), "Insert success", Toast.LENGTH_SHORT);
                 toast.show();
                 editTextAgency.setText("");
                 editTextAddress.setText("");
-
+                requireActivity().recreate();
             }
             else {Toast toast = Toast.makeText(getContext(), "Don't Leave Empty Fields", Toast.LENGTH_SHORT);
                 toast.show();}
