@@ -1,6 +1,7 @@
 package com.example.journey;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity (tableName = "TAgency")
@@ -12,8 +13,14 @@ public class TravelAgency {
     @ColumnInfo(name="AgencyAddress")
     public String address;
 
-    public TravelAgency(int id, String agency_name, String address) {
+    @Ignore
+    public TravelAgency(int id,String agency_name, String address) {
         this.id = id;
+        this.agency_name = agency_name;
+        this.address = address;
+    }
+    public TravelAgency(String agency_name, String address) {
+        //this.id = id;
         this.agency_name = agency_name;
         this.address = address;
     }

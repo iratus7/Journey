@@ -6,17 +6,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.room.Room;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static JourneyDatabase journeyDatabase;
     private String DB_NAME = "journeydb";
-
     private DrawerLayout drawer;
 
     @Override
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //JourneyRepository journeyRepository =new JourneyRepository(getApplicationContext());
         journeyDatabase = Room.databaseBuilder(getApplicationContext(),JourneyDatabase.class,DB_NAME).allowMainThreadQueries().build();
 
-        //TravelAgency travelAgency1 = new TravelAgency(2,"hermes","dragoymi");
+        //TravelAgency travelAgency1 = new TravelAgency(3,"hermes","dragoymi");
         //MainActivity.journeyDatabase.journeyDao().insertTravelAgency(travelAgency1);
 
         if (savedInstanceState == null) {
