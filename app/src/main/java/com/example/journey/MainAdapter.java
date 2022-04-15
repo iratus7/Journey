@@ -104,9 +104,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 notifyItemRangeChanged(position,dataList.size());
             }
         });
-
-
-
     }
 
     @Override

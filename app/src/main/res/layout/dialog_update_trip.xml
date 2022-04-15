@@ -8,16 +8,40 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edit_TextAname"
-        android:hint="Enter Name"
+        android:id="@+id/edit_TextTCity"
+        android:hint="@string/enter_city"
         android:padding="12dp"
         android:lines="2"
         android:gravity="top"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edit_TextAaddress"
-        android:hint="Enter Address"
+        android:id="@+id/edit_TextTCountry"
+        android:hint="@string/enter_country"
+        android:padding="12dp"
+        android:lines="2"
+        android:gravity="top"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_TextTDuration"
+        android:hint="@string/enter_duration"
+        android:padding="12dp"
+        android:lines="2"
+        android:gravity="top"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_TextTType"
+        android:hint="@string/enter_type"
+        android:padding="12dp"
+        android:lines="2"
+        android:gravity="top"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_TextTCoordinates"
+        android:hint="@string/enter_coordinates"
         android:padding="12dp"
         android:lines="2"
         android:gravity="top"/>

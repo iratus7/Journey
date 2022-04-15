@@ -31,5 +31,7 @@ public interface JourneyDao {
 
     @Query("SELECT * FROM TAgency")
     List<TravelAgency> getTravelAgency();
+    @Query("SELECT * FROM Trips")
+    List<Trip> getTrip();
 
 }

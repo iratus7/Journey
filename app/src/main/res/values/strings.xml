@@ -8,5 +8,10 @@
     <string name="packets">Packets</string>
     <string name="customers">Customers</string>
     <string name="search">Search</string>
+    <string name="enter_city">Enter City</string>
+    <string name="enter_country">Enter Country</string>
+    <string name="enter_duration">Enter Duration</string>
+    <string name="enter_type">Enter Type</string>
+    <string name="enter_coordinates">Enter Coordinates</string>
 
 </resources>

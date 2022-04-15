@@ -6,13 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.room.Room;
-
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
-
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -56,15 +52,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new HomeFragment()).commit();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new HomeFragmentR()).commit();
                 break;
-
+            case R.id.nav_trip:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new TripFragmentActions()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new TripFragmentResults()).commit();
+                break;
             case R.id.nav_travelagency:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new TravelAgencyFragmentActions()).commit();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new TravelAgencyFragmentResults()).commit();
                 break;
-
-//            case R.id.nav_home:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new HomeFragment()).commit();
-//                break;
 //
 //            case R.id.nav_home:
 //                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new HomeFragment()).commit();

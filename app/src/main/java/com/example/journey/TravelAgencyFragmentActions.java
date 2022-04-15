@@ -1,5 +1,6 @@
 package com.example.journey;
 
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,12 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.util.Objects;
 
 
 public class TravelAgencyFragmentActions extends Fragment {
@@ -41,7 +40,10 @@ public class TravelAgencyFragmentActions extends Fragment {
                 toast.show();
                 editTextAgency.setText("");
                 editTextAddress.setText("");
+                ///////////////////
                 requireActivity().recreate();
+
+
             }
             else {Toast toast = Toast.makeText(getContext(), "Don't Leave Empty Fields", Toast.LENGTH_SHORT);
                 toast.show();}
@@ -55,4 +57,5 @@ public class TravelAgencyFragmentActions extends Fragment {
         });
         return view;
     }
+
 }
