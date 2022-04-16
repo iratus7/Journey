@@ -13,5 +13,7 @@
     <string name="enter_duration">Enter Duration</string>
     <string name="enter_type">Enter Type</string>
     <string name="enter_coordinates">Enter Coordinates</string>
+    <string name="give_start_date">Give Start Date</string>
+    <string name="give_price">Give Price</string>
 
 </resources>

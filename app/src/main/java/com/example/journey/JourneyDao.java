@@ -33,5 +33,22 @@ public interface JourneyDao {
     List<TravelAgency> getTravelAgency();
     @Query("SELECT * FROM Trips")
     List<Trip> getTrip();
+    @Query("SELECT * FROM Packages")
+    List<PackageTravel> getPackageTravel();
+    @Query("SELECT AgencyName FROM TAgency")
+    List<String> getANames();
+    @Query("SELECT TripCity FROM Trips")
+    List<String> getTCity();
+    @Query("SELECT Tid FROM Trips WHERE TripCity = :city")
+    int getTid(String city);
+    @Query("SELECT AgencyId FROM TAgency WHERE AgencyName = :agency")
+    int getAid(String agency);
+    @Query("SELECT TripCity FROM Trips WHERE Tid = :id")
+    String getTripCity(int id);
+    @Query("SELECT AgencyName FROM TAgency WHERE AgencyId = :id")
+    String getAgencyName(int id);
+
+
+
 
 }
