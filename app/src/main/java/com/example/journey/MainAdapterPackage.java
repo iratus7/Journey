@@ -97,25 +97,29 @@ public class MainAdapterPackage extends RecyclerView.Adapter<MainAdapterPackage.
 
                 spAId.setAdapter(spAdapterA);
                 spTId.setAdapter(spAdapterT);
+                spAId.setSelection(AId-1);
+                spTId.setSelection(TId-1);
+
                 editTextD.setText(date);
                 editTextP.setText(price);
 
                 btCancel.setOnClickListener(v1 -> {
-                    dialog.dismiss();                    dataList.addAll(JourneyDatabase.getInstance(context).journeyDao().getPackageTravel());
+                    dialog.dismiss();
+                    //dataList.addAll(JourneyDatabase.getInstance(context).journeyDao().getPackageTravel());
 
                 });
 
                 btUpdate.setOnClickListener(v1 -> {
                     dialog.dismiss();
-                    int Aid = spAId.getSelectedItemPosition();
-                    int Tid = spTId.getSelectedItemPosition();
+                    int Aid = spAId.getSelectedItemPosition()+1;
+                    int Tid = spTId.getSelectedItemPosition()+1;
                     String uTextd = editTextD.getText().toString().trim();
                     String uTextp = editTextP.getText().toString().trim();
                     PackageTravel packageTravel = new PackageTravel(Pid,Aid,Tid,uTextd,uTextp);
                     JourneyDatabase.getInstance(context).journeyDao().updatePackageTravel(packageTravel);
                     dataList.clear();
                     dataList.addAll(JourneyDatabase.getInstance(context).journeyDao().getPackageTravel());
-                    notifyDataSetChanged();
+                    reloadMainAdapter();
                 });
             }
         });
