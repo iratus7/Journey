@@ -52,11 +52,11 @@ public class MainAdapterPackage extends RecyclerView.Adapter<MainAdapterPackage.
 
         PackageTravel data = dataList.get(position);
         database = JourneyDatabase.getInstance(context);
-        String city = database.journeyDao().getTripCity(data.TravelAgencyId);
-        String agency = database.journeyDao().getAgencyName(data.TripId);
+        String city = database.journeyDao().getTripCity(data.TripId);
+        String agency = database.journeyDao().getAgencyName(data.TravelAgencyId);
 
-        holder.textViewPAgencyId.setText(city);
-        holder.textViewPTripId.setText(agency);
+        holder.textViewPAgencyId.setText(agency);
+        holder.textViewPTripId.setText(city);
         holder.textViewPDate.setText(data.date);
         holder.textViewPPrice.setText(data.price);
         holder.btEdit.setOnClickListener(new View.OnClickListener() {
