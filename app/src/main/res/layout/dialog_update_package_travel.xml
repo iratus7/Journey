@@ -8,11 +8,14 @@
     <Spinner
         android:id="@+id/SpinnerAId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:minHeight="48dp" />
+
     <Spinner
         android:id="@+id/SpinnerTId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:minHeight="48dp" />
 
     <EditText
         android:layout_width="match_parent"
