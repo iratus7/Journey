@@ -15,5 +15,8 @@
     <string name="enter_coordinates">Enter Coordinates</string>
     <string name="give_start_date">Give Start Date</string>
     <string name="give_price">Give Price</string>
+    <string name="give_package">Give Package</string>
+    <string name="give_hotel">Give Hotel</string>
+    <string name="give_name">Give Name</string>
 
 </resources>
