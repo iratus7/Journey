@@ -4,7 +4,7 @@ public class Customers {
     private String name;
     private String hotel;
     private int packagetravelid;
-    private  String hiddenid;
+    /*private  String hiddenid;
 
     public Customers(String name, String hotel, int packagetravelid, String hiddenid) {
         this.name = name;
@@ -19,7 +19,7 @@ public class Customers {
 
     public void setHiddenid(String hiddenid) {
         this.hiddenid = hiddenid;
-    }
+    }*/
 
     public Customers(String name, String hotel, int packagetravelid) {
         this.name = name;

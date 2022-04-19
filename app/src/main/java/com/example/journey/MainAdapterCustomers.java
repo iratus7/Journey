@@ -1,13 +1,11 @@
 package com.example.journey;
 
-import static android.content.ContentValues.TAG;
 
 import static com.example.journey.MainActivity.db;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,32 +19,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainAdapterCustomers extends RecyclerView.Adapter<MainAdapterCustomers.ViewHolder> {
 
     private List<Customers> dataList;
     private Activity context;
+    private List<String> idList;
     private JourneyDatabase database;
 
     @SuppressLint("NotifyDataSetChanged")
-    public MainAdapterCustomers(Activity context, List<Customers> dataList) {
+    public MainAdapterCustomers(Activity context, List<Customers> dataList, List<String> idList) {
         this.context = context;
         this.dataList = dataList;
+        this.idList = idList;
         notifyDataSetChanged();
     }
 
@@ -66,23 +58,24 @@ public class MainAdapterCustomers extends RecyclerView.Adapter<MainAdapterCustom
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Customers data = dataList.get(position);
+        String hiddenid = idList.get(position);
         holder.textViewCName.setText(data.getName());
         holder.textViewCHotel.setText(data.getHotel());
         holder.textViewCPId.setText(String.valueOf(data.getPackagetravelid()));
-        holder.textViewHiddenId.setText(data.getHiddenid());
+        holder.textViewHiddenId.setText(hiddenid);
         holder.btEdit.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View v) {
                 Customers c = dataList.get(holder.getAdapterPosition());
+                String Hid = idList.get(holder.getAdapterPosition());
 
                 String name = c.getName();
                 String hotel = c.getHotel();
                 int pid = c.getPackagetravelid();
-                String hiddenId = c.getHiddenid();
 
                 Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.dialog_update_package_travel);
+                dialog.setContentView(R.layout.dialog_update_customers);
                 int width = WindowManager.LayoutParams.MATCH_PARENT;
                 int height = WindowManager.LayoutParams.WRAP_CONTENT;
                 dialog.getWindow().setLayout(width, height);
@@ -96,12 +89,12 @@ public class MainAdapterCustomers extends RecyclerView.Adapter<MainAdapterCustom
                 List<String> spList;
                 //JourneyDatabase database = JourneyDatabase.getInstance(context);
                 spList = MainActivity.journeyDatabase.journeyDao().getPackageDetails();
-                if (spList.isEmpty()) {}else {
-                ArrayAdapter<String> spAdapterA = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, spList);
-                spAdapterA.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                if (!spList.isEmpty()) {
+                    ArrayAdapter<String> spAdapterA = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, spList);
+                    spAdapterA.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
                     spPId.setAdapter(spAdapterA);
-                    spPId.setSelection(holder.getAdapterPosition());
+                    spPId.setSelection(holder.getAdapterPosition()-1);
                 }
                 editTextN.setText(name);
                 editTextH.setText(hotel);
@@ -113,33 +106,41 @@ public class MainAdapterCustomers extends RecyclerView.Adapter<MainAdapterCustom
                 btUpdate.setOnClickListener(v1 -> {
                     dialog.dismiss();
                     int SPselection = spPId.getSelectedItemPosition();
-                    int Pid = MainActivity.journeyDatabase.journeyDao().getSelectedPackageId(SPselection);
+                    int Pid = MainActivity.journeyDatabase.journeyDao().getSelectedPackageId(SPselection+1);
                     String uTextn = editTextN.getText().toString().trim();
                     String uTexth = editTextH.getText().toString().trim();
-                    Customers customers = new Customers(uTextn,uTexth,Pid);
+                    Customers customers = new Customers(uTextn, uTexth, Pid);
 
                     try {
-                         MainActivity.db.
+                        MainActivity.db.
                                 collection("Customers").
-                                document(hiddenId).
+                                document(Hid).
                                 set(customers).
                                 addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        Toast.makeText(context,"Update Success.",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, "Update Success.", Toast.LENGTH_LONG).show();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(context,"add operation failed.",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, "add operation failed.", Toast.LENGTH_LONG).show();
                                     }
                                 });
                     } catch (Exception e) {
                         String message = e.getMessage();
-                        Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                     }
+                    //JourneyDatabase.getInstance(context).journeyDao().updateTravelAgency(travelAgency);
+                    //dataList.clear();
+                    //dataList.addAll(JourneyDatabase.getInstance(context).journeyDao().getTravelAgency());
+                    notifyDataSetChanged();
                     reloadMainAdapter();
+
+                    //CustomersFragmentResults.updateFirestoreResults();
+                    //Activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new PackageFragmentResults()).commit();
+
                 });
             }
         });
@@ -149,7 +150,7 @@ public class MainAdapterCustomers extends RecyclerView.Adapter<MainAdapterCustom
             public void onClick(View v) {
                 Customers data = dataList.get(holder.getAdapterPosition());
                 db.collection("Customers").
-                        document(data.getHiddenid()).
+                        document(idList.get(holder.getAdapterPosition())).
                         delete().
                         addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -165,7 +166,7 @@ public class MainAdapterCustomers extends RecyclerView.Adapter<MainAdapterCustom
                 int position = holder.getAdapterPosition();
                 dataList.remove(position);
                 notifyItemRemoved(position);
-                notifyItemRangeChanged(position,dataList.size());
+                notifyItemRangeChanged(position, dataList.size());
             }
         });
     }
@@ -177,7 +178,7 @@ public class MainAdapterCustomers extends RecyclerView.Adapter<MainAdapterCustom
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewCName, textViewCHotel, textViewCPId,textViewHiddenId;
+        TextView textViewCName, textViewCHotel, textViewCPId, textViewHiddenId;
         ImageView btEdit, btDelete;
 
         public ViewHolder(@NonNull View itemView) {

@@ -25,6 +25,7 @@ public class CustomersFragmentResults extends Fragment {
     LinearLayoutManager linearLayoutManager;
     RecyclerView recyclerView;
     List<Customers> dataList = new ArrayList<>();
+    List<String> idList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -42,19 +43,20 @@ public class CustomersFragmentResults extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String pid = document.getLong("packagetravelid").toString();
                                 String hiddenId= document.getId();
-                                Customers customer = new Customers(document.getString("name"), document.getString("hotel"), parseInt(pid),hiddenId);
+                                Customers customer = new Customers(document.getString("name"), document.getString("hotel"), parseInt(pid));
                                 dataList.add(customer);
-                                linearLayoutManager = new LinearLayoutManager(getContext());
-                                recyclerView.setLayoutManager(linearLayoutManager);
-                                adapter = new MainAdapterCustomers((Activity) getContext(), dataList);
-                                recyclerView.setAdapter(adapter);
+                                idList.add(hiddenId);
+
                             }
+                            linearLayoutManager = new LinearLayoutManager(getContext());
+                            recyclerView.setLayoutManager(linearLayoutManager);
+                            adapter = new MainAdapterCustomers((Activity) getContext(), dataList,idList);
+                            recyclerView.setAdapter(adapter);
                         } else {
                             Toast.makeText(getContext(), "There is no data", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
         return view;
     }
-}
+ }
