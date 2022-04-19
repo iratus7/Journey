@@ -47,8 +47,8 @@ public interface JourneyDao {
     String getTripCity(int id);
     @Query("SELECT AgencyName FROM TAgency WHERE AgencyId = :id")
     String getAgencyName(int id);
-
-
-
-
+    @Query("SELECT (Trips.TripCity|| ', ' ||TAgency.AgencyName|| ', ' ||Packages.PackageStartDate|| ', ' ||Packages.PackagePrice) AS RESULT FROM Packages,Trips,TAgency WHERE( Trips.Tid = Packages.TId AND TAgency.AgencyId = Packages.TAId)")
+    List<String> getPackageDetails();
+    @Query("SELECT PackageId FROM Packages WHERE ROWID = :position")
+    int getSelectedPackageId(int position);
 }

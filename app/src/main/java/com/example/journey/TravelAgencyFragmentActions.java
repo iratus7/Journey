@@ -40,8 +40,8 @@ public class TravelAgencyFragmentActions extends Fragment {
                 toast.show();
                 editTextAgency.setText("");
                 editTextAddress.setText("");
-                ///////////////////
-                requireActivity().recreate();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new TravelAgencyFragmentResults()).commit();
+
 
 
             }

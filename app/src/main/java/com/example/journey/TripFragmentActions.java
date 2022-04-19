@@ -55,8 +55,8 @@ public class TripFragmentActions extends Fragment {
                 editTextDuration.setText("");
                 editTextType.setText("");
                 editTextCoordinates.setText("");
-                ///////////////////
-                requireActivity().recreate();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new TripFragmentResults()).commit();
+
 
             }
             else {Toast toast = Toast.makeText(getContext(), "Don't Leave Empty Fields", Toast.LENGTH_SHORT);

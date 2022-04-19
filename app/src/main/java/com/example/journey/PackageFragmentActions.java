@@ -69,9 +69,8 @@ public class PackageFragmentActions extends Fragment {
                 editTextPPrice.setText("");
 
                 ///////////////////
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                    requireActivity().recreate();
-                }
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new PackageFragmentResults()).commit();
+
             }
             else {Toast toast = Toast.makeText(getContext(), "Don't Leave Empty Fields", Toast.LENGTH_SHORT);
                 toast.show();}
