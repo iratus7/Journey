@@ -59,7 +59,7 @@ public class MainAdapterPackage extends RecyclerView.Adapter<MainAdapterPackage.
         holder.textViewPAgencyId.setText(agency);
         holder.textViewPTripId.setText(city);
         holder.textViewPDate.setText(data.date);
-        holder.textViewPPrice.setText(data.price);
+        holder.textViewPPrice.setText(data.price+'€');
         holder.btEdit.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override

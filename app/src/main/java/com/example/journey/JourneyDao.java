@@ -51,4 +51,11 @@ public interface JourneyDao {
     List<String> getPackageDetails();
     @Query("SELECT PackageId FROM Packages WHERE ROWID = :position")
     int getSelectedPackageId(int position);
+    @Query("SELECT TripCityCoordinates FROM Trips")
+    List<String> getTCoordinates();
+    @Query("SELECT TripDuration FROM Trips")
+    List<String> getTDuration();
+    @Query("SELECT  (Trips.TripCity|| ', ' ||TAgency.AgencyName|| ', ' ||Packages.PackageStartDate|| ', ' ||Packages.PackagePrice)||'€' AS RESULT FROM Packages,Trips,TAgency WHERE( Trips.Tid = Packages.TId AND TAgency.AgencyId = Packages.TAId)")
+    List<String> getHomePackets();
+
 }

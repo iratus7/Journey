@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new HomeFragment()).commit();
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new HomeFragmentR()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new MapsFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_home);
         }
     }
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()){
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new HomeFragment()).commit();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new HomeFragmentR()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new MapsFragment()).commit();
                 break;
             case R.id.nav_trip:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new TripFragmentActions()).commit();
