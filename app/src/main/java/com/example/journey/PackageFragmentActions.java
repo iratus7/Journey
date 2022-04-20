@@ -1,5 +1,8 @@
 package com.example.journey;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -68,6 +71,14 @@ public class PackageFragmentActions extends Fragment {
                 editTextPDate.setText("");
                 editTextPPrice.setText("");
 
+                //notifications
+                NotificationManager notif=(NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                Notification notify=new Notification.Builder
+                        (context).setContentTitle("Package Insert").setContentText("New package inserted with date start "+uTextD+" and price "+uTextT).
+                        setContentTitle("New travel package inserted").setSmallIcon(R.drawable.ic_trip).build();
+
+                notify.flags |= Notification.FLAG_AUTO_CANCEL;
+                notif.notify(0, notify);
                 ///////////////////
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new PackageFragmentResults()).commit();
 
