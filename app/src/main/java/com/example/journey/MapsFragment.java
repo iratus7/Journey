@@ -22,7 +22,7 @@ import java.util.List;
 
 public class MapsFragment extends Fragment {
 
-    private GoogleMap eMap;
+    GoogleMap eMap;
     List<String> coordinatesList = new ArrayList<>();
     List<String> cityList = new ArrayList<>();
     List<String> tripDuration = new ArrayList<>();
@@ -40,7 +40,7 @@ public class MapsFragment extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            eMap=googleMap;
+            eMap = googleMap;
             coordinatesList = MainActivity.journeyDatabase.journeyDao().getTCoordinates();
             cityList = MainActivity.journeyDatabase.journeyDao().getTCity();
             tripDuration = MainActivity.journeyDatabase.journeyDao().getTDuration();
