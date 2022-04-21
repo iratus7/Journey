@@ -30,7 +30,7 @@ public class PackageFragmentActions extends Fragment {
     List<String> spList = new ArrayList<>();
     List<String> spListT = new ArrayList<>();
     JourneyDatabase database;
-    private Activity context;
+    //private Activity context;
 
     @Nullable
     @Override
@@ -57,9 +57,8 @@ public class PackageFragmentActions extends Fragment {
 
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
             NotificationChannel channel= new NotificationChannel("Notifications","Notifications",NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager manager = context.getSystemService(NotificationManager.class);
+            NotificationManager manager = getContext().getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
-
         }
         btAdd.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -84,7 +83,7 @@ public class PackageFragmentActions extends Fragment {
                 String currentDateandTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
                 builder.setContentTitle("New Package inserted "+currentDateandTime);
                 builder.setContentText("Package for "+uTextD+" with price "+uTextT+"€");
-                builder.setSmallIcon(R.drawable.ic_trip);
+                builder.setSmallIcon(R.drawable.ic_packets);
                 builder.setAutoCancel(true);
                 NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getContext());
                 managerCompat.notify(1,builder.build());

@@ -4,6 +4,9 @@ package com.example.journey;
 import static com.example.journey.MainActivity.db;
 import static java.lang.Integer.parseInt;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,6 +28,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -52,7 +59,11 @@ public class CustomersFragmentActions extends Fragment {
 
         btAdd = view.findViewById(R.id.buttonAdd);
         btClear = view.findViewById(R.id.buttonClear);
-
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            NotificationChannel channel= new NotificationChannel("Notifications","Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getContext().getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
         btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +99,15 @@ public class CustomersFragmentActions extends Fragment {
 
                         editTextName.setText("");
                         editTextHotel.setText("");
+                        //notifications
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(),"Notifications");
+                        String currentDateandTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+                        builder.setContentTitle("New Customer inserted "+currentDateandTime);
+                        builder.setContentText("Customer "+uTextN+" in hotel "+uTextH);
+                        builder.setSmallIcon(R.drawable.ic_customers);
+                        builder.setAutoCancel(true);
+                        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getContext());
+                        managerCompat.notify(1,builder.build());
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new CustomersFragmentResults()).commit();
 
                     } else {

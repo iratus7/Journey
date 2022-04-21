@@ -2,6 +2,9 @@ package com.example.journey;
 
 
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +14,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class TravelAgencyFragmentActions extends Fragment {
@@ -27,7 +34,11 @@ public class TravelAgencyFragmentActions extends Fragment {
         editTextAddress = view.findViewById(R.id.editTextAddress);
         btAdd = view.findViewById(R.id.buttonAdd);
         btClear = view.findViewById(R.id.buttonClear);
-
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            NotificationChannel channel= new NotificationChannel("Notifications","Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getContext().getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
         btAdd.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -40,6 +51,15 @@ public class TravelAgencyFragmentActions extends Fragment {
                 toast.show();
                 editTextAgency.setText("");
                 editTextAddress.setText("");
+                //notifications
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(),"Notifications");
+                String currentDateandTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+                builder.setContentTitle("New Travel Agency inserted "+currentDateandTime);
+                builder.setContentText("Travel Agency "+uText);
+                builder.setSmallIcon(R.drawable.ic_travelagency);
+                builder.setAutoCancel(true);
+                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getContext());
+                managerCompat.notify(1,builder.build());
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new TravelAgencyFragmentResults()).commit();
 
 
