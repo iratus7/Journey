@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -44,20 +45,31 @@ public class MapsFragment extends Fragment {
             coordinatesList = MainActivity.journeyDatabase.journeyDao().getTCoordinates();
             cityList = MainActivity.journeyDatabase.journeyDao().getTCity();
             tripDuration = MainActivity.journeyDatabase.journeyDao().getTDuration();
-            if (!cityList.isEmpty()&&!coordinatesList.isEmpty()){
-                for (int i=0;i<cityList.size();i++){
-                    String[] latlong =  coordinatesList.get(i).split(",");
+            if (!cityList.isEmpty() && !coordinatesList.isEmpty()) {
+                for (int i = 0; i < cityList.size(); i++) {
+                    String[] latlong = coordinatesList.get(i).split(",");
                     double latitude = Double.parseDouble(latlong[0]);
                     double longitude = Double.parseDouble(latlong[1]);
-                    LatLng city = new LatLng(latitude,longitude);
-                    eMap.addMarker(new MarkerOptions().position(city).title("Trip to "+cityList.get(i)+" for "+tripDuration.get(i)+" days!"));
+                    LatLng city = new LatLng(latitude, longitude);
+                    eMap.addMarker(new MarkerOptions().position(city).title("Trip to " + cityList.get(i) + " for " + tripDuration.get(i) + " days!"));
                 }
 
             }
-
             LatLng thess = new LatLng(40.640064, 22.944420);
-            //eMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            eMap.moveCamera(CameraUpdateFactory.newLatLng(thess));
+
+            Bundle bundle = getArguments();
+            if (bundle != null) {
+                String selectedCity = bundle.getString("SelectedCity");
+                String coordinates = MainActivity.journeyDatabase.journeyDao().getCoordinatesByCity(selectedCity);
+                String[] latlong = coordinates.split(",");
+                double latitude = Double.parseDouble(latlong[0]);
+                double longitude = Double.parseDouble(latlong[1]);
+                LatLng selectedCityMoveCamera = new LatLng(latitude, longitude);
+                eMap.moveCamera(CameraUpdateFactory.newLatLng(selectedCityMoveCamera));
+                Toast.makeText(getContext(), "Trip to  " + selectedCity, Toast.LENGTH_LONG).show();
+            } else {
+                eMap.moveCamera(CameraUpdateFactory.newLatLng(thess));
+            }
         }
     };
 

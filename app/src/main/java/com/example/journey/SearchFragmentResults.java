@@ -20,19 +20,40 @@ public class SearchFragmentResults extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_search_r, container, false);
         listViewSearchResults = view.findViewById(R.id.listViewSearchResults);
 
         Bundle bundle = getArguments();
-        if (bundle != null) {int position = bundle.getInt("position");
-            Toast.makeText(getContext(), "Selected "+position, Toast.LENGTH_LONG).show();
+        if (bundle != null) {
+            int position = bundle.getInt("position")+1;
+            switch (position){
+                case 1:
+                    searchResultsList = MainActivity.journeyDatabase.journeyDao().getTop5CheapPackages();
+                    break;
+                case 2:
+                    searchResultsList = MainActivity.journeyDatabase.journeyDao().getTop5DurationTrips();
+
+                    break;
+                case 3:
+                    searchResultsList = MainActivity.journeyDatabase.journeyDao().getTop5CitiesOfferedFromPackets();
+                    break;
+                case 4:
+                    searchResultsList = MainActivity.journeyDatabase.journeyDao().getHomePackets();
+                    break;
+                case 5:
+                    searchResultsList = MainActivity.journeyDatabase.journeyDao().getHomePackets();
+                    break;
+                case 6:
+                    searchResultsList = MainActivity.journeyDatabase.journeyDao().getHomePackets();
+                    break;
+            }
         }
+        else {
+            searchResultsList = MainActivity.journeyDatabase.journeyDao().getTop5CheapPackages();
 
-        searchResultsList = MainActivity.journeyDatabase.journeyDao().getHomePackets();
-            ArrayAdapter<String> searchResultsAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, searchResultsList);
-            listViewSearchResults.setAdapter(searchResultsAdapter);
-
+        }
+        ArrayAdapter<String> searchResultsAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, searchResultsList);
+        listViewSearchResults.setAdapter(searchResultsAdapter);
             return view;
         }
 
