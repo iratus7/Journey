@@ -1,8 +1,7 @@
 package com.example.journey;
 import android.app.Activity;
-import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,9 +14,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -53,6 +55,12 @@ public class PackageFragmentActions extends Fragment {
         spAdapterT.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spTid.setAdapter(spAdapterT);
 
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            NotificationChannel channel= new NotificationChannel("Notifications","Notifications",NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getContext().getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+
+        }
         btAdd.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -72,13 +80,21 @@ public class PackageFragmentActions extends Fragment {
                 editTextPPrice.setText("");
 
                 //notifications
-                NotificationManager notif=(NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(),"Notifications");
+                String currentDateandTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+                builder.setContentTitle("New Package inserted "+currentDateandTime);
+                builder.setContentText("Package for "+uTextD+" with price "+uTextT+"€");
+                builder.setSmallIcon(R.drawable.ic_trip);
+                builder.setAutoCancel(true);
+                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getContext());
+                managerCompat.notify(1,builder.build());
+                /*NotificationManager notif=(NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                 Notification notify=new Notification.Builder
                         (context).setContentTitle("Package Insert").setContentText("New package inserted with date start "+uTextD+" and price "+uTextT).
                         setContentTitle("New travel package inserted").setSmallIcon(R.drawable.ic_trip).build();
 
                 notify.flags |= Notification.FLAG_AUTO_CANCEL;
-                notif.notify(0, notify);
+                notif.notify(0, notify);*/
                 ///////////////////
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new PackageFragmentResults()).commit();
 
