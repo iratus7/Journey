@@ -57,7 +57,7 @@ public class PackageFragmentActions extends Fragment {
 
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
             NotificationChannel channel= new NotificationChannel("Notifications","Notifications",NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager manager = getContext().getSystemService(NotificationManager.class);
+            NotificationManager manager = context.getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
 
         }
@@ -88,14 +88,7 @@ public class PackageFragmentActions extends Fragment {
                 builder.setAutoCancel(true);
                 NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getContext());
                 managerCompat.notify(1,builder.build());
-                /*NotificationManager notif=(NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-                Notification notify=new Notification.Builder
-                        (context).setContentTitle("Package Insert").setContentText("New package inserted with date start "+uTextD+" and price "+uTextT).
-                        setContentTitle("New travel package inserted").setSmallIcon(R.drawable.ic_trip).build();
 
-                notify.flags |= Notification.FLAG_AUTO_CANCEL;
-                notif.notify(0, notify);*/
-                ///////////////////
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new PackageFragmentResults()).commit();
 
             }
