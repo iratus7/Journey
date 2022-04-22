@@ -2,7 +2,7 @@ package com.example.journey;
 
 
 import static com.example.journey.MainActivity.db;
-
+import static java.lang.Integer.parseInt;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -17,14 +17,15 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainAdapterCustomers extends RecyclerView.Adapter<MainAdapterCustomers.ViewHolder> {
@@ -32,7 +33,9 @@ public class MainAdapterCustomers extends RecyclerView.Adapter<MainAdapterCustom
     private List<Customers> dataList;
     private Activity context;
     private List<String> idList;
-    private JourneyDatabase database;
+    List<Integer> packetIdList=new ArrayList<>();
+
+    //private JourneyDatabase database;
 
     @SuppressLint("NotifyDataSetChanged")
     public MainAdapterCustomers(Activity context, List<Customers> dataList, List<String> idList) {
@@ -87,14 +90,13 @@ public class MainAdapterCustomers extends RecyclerView.Adapter<MainAdapterCustom
                 Button btCancel = dialog.findViewById(R.id.bt_cancel);
 
                 List<String> spList;
-                //JourneyDatabase database = JourneyDatabase.getInstance(context);
                 spList = MainActivity.journeyDatabase.journeyDao().getPackageDetails();
+                packetIdList = MainActivity.journeyDatabase.journeyDao().getSelectedPackageId();
                 if (!spList.isEmpty()) {
                     ArrayAdapter<String> spAdapterA = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, spList);
                     spAdapterA.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
                     spPId.setAdapter(spAdapterA);
-                    spPId.setSelection(holder.getAdapterPosition()-1);
+                    spPId.setSelection(packetIdList.indexOf(pid));
                 }
                 editTextN.setText(name);
                 editTextH.setText(hotel);
@@ -105,8 +107,7 @@ public class MainAdapterCustomers extends RecyclerView.Adapter<MainAdapterCustom
 
                 btUpdate.setOnClickListener(v1 -> {
                     dialog.dismiss();
-                    int SPselection = spPId.getSelectedItemPosition();
-                    int Pid = MainActivity.journeyDatabase.journeyDao().getSelectedPackageId(SPselection+1);
+                    int Pid = packetIdList.get(spPId.getSelectedItemPosition());
                     String uTextn = editTextN.getText().toString().trim();
                     String uTexth = editTextH.getText().toString().trim();
                     Customers customers = new Customers(uTextn, uTexth, Pid);
@@ -132,14 +133,23 @@ public class MainAdapterCustomers extends RecyclerView.Adapter<MainAdapterCustom
                         String message = e.getMessage();
                         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                     }
-                    //JourneyDatabase.getInstance(context).journeyDao().updateTravelAgency(travelAgency);
-                    //dataList.clear();
-                    //dataList.addAll(JourneyDatabase.getInstance(context).journeyDao().getTravelAgency());
-                    notifyDataSetChanged();
-                    reloadMainAdapter();
+                    dataList.clear();
+                    db.collection("Customers")
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            String pid = document.getLong("packagetravelid").toString();
+                                            Customers customer = new Customers(document.getString("name"), document.getString("hotel"), parseInt(pid));
+                                            dataList.add(customer);
+                                            reloadMainAdapter();
+                                        }
 
-                    //CustomersFragmentResults.updateFirestoreResults();
-                    //Activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new PackageFragmentResults()).commit();
+                                    }
+                                }
+                            });
 
                 });
             }
@@ -148,7 +158,7 @@ public class MainAdapterCustomers extends RecyclerView.Adapter<MainAdapterCustom
         holder.btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Customers data = dataList.get(holder.getAdapterPosition());
+                int position = holder.getAdapterPosition();
                 db.collection("Customers").
                         document(idList.get(holder.getAdapterPosition())).
                         delete().
@@ -163,7 +173,6 @@ public class MainAdapterCustomers extends RecyclerView.Adapter<MainAdapterCustom
                             }
                         });
 
-                int position = holder.getAdapterPosition();
                 dataList.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, dataList.size());

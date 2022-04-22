@@ -68,8 +68,10 @@ public interface JourneyDao {
     @Query("SELECT (Trips.TripCity|| ', ' ||TAgency.AgencyName|| ', ' ||Packages.PackageStartDate|| ', ' ||Packages.PackagePrice) AS RESULT FROM Packages,Trips,TAgency WHERE( Trips.Tid = Packages.TId AND TAgency.AgencyId = Packages.TAId)")
     List<String> getPackageDetails();
 
-    @Query("SELECT PackageId FROM Packages WHERE ROWID = :position")
-    int getSelectedPackageId(int position);
+    /*@Query("SELECT PackageId FROM Packages WHERE ROWID = :position")
+    int getSelectedPackageIdRowid(int position);*/
+    @Query("SELECT PackageId FROM Packages ORDER BY PackageId ")
+    List<Integer> getSelectedPackageId();
 
     @Query("SELECT TripCityCoordinates FROM Trips")
     List<String> getTCoordinates();

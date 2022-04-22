@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -88,6 +89,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                     dataList.clear();
                     dataList.addAll(JourneyDatabase.getInstance(context).journeyDao().getTravelAgency());
                     notifyDataSetChanged();
+                    Toast.makeText(context, "Update Success.", Toast.LENGTH_LONG).show();
                 });
             }
         });

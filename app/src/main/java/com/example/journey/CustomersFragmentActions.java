@@ -39,6 +39,7 @@ public class CustomersFragmentActions extends Fragment {
     Spinner spPackageId;
     Button btAdd, btClear;
     List<String> spPList;
+    List<Integer> packetIdList;
 
 
     @Nullable
@@ -53,9 +54,11 @@ public class CustomersFragmentActions extends Fragment {
 
 
         spPList = MainActivity.journeyDatabase.journeyDao().getPackageDetails();
+        packetIdList = MainActivity.journeyDatabase.journeyDao().getSelectedPackageId();
         ArrayAdapter<String> spAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, spPList);
         spAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spPackageId.setAdapter(spAdapter);
+        packetIdList = MainActivity.journeyDatabase.journeyDao().getSelectedPackageId();
 
         btAdd = view.findViewById(R.id.buttonAdd);
         btClear = view.findViewById(R.id.buttonClear);
@@ -70,12 +73,7 @@ public class CustomersFragmentActions extends Fragment {
 
                 String uTextN = editTextName.getText().toString().trim();
                 String uTextH = editTextHotel.getText().toString().trim();
-                //String selectedItemPid = spPackageId.getSelectedItem().toString();
-                int position = spPackageId.getSelectedItemPosition()+1;
-                int uTextP = MainActivity.journeyDatabase.journeyDao().getSelectedPackageId(position);
-
-                //int uTextP = MainActivity.journeyDatabase.journeyDao().getTid(selectedItemPid);
-
+                int uTextP =packetIdList.get(spPackageId.getSelectedItemPosition());
                 try {
                     if (!uTextN.equals("") && !uTextH.equals("") && uTextP > 0) {
                         //Customers customers = new Customers();
