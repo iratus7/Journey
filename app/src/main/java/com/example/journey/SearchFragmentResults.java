@@ -111,7 +111,33 @@ public class SearchFragmentResults extends Fragment {
                             });
                     break;
                 case 6:
-                    searchResultsList = MainActivity.journeyDatabase.journeyDao().getHomePackets();
+                    List<Long> packagesId = new ArrayList<>();
+                    db.collection("Customers")
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            packagesId.add(document.getLong("packagetravelid"));
+                                        }
+                                        Map<Long, Long> couterMap = packagesId.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+                                        Map<Long, Long> sortedMap = new LinkedHashMap<>();
+                                        couterMap.entrySet().stream().sorted(Map.Entry.comparingByValue())
+                                                .forEachOrdered(x -> sortedMap.put(x.getKey(), x.getValue()));
+
+                                        int n = sortedMap.size();
+                                        for (int i = n - 1; i >= n - 5; i--) {
+                                            String[] out = sortedMap.entrySet().toArray()[i].toString().split("=");
+                                            searchResultsList.add("Travel Package : " + MainActivity.journeyDatabase.journeyDao().getPacketById(parseInt(out[0])) + " used by " + out[1] + " customers");
+                                        }
+                                        ArrayAdapter<String> searchResultsAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, searchResultsList);
+                                        listViewSearchResults.setAdapter(searchResultsAdapter);
+                                    } else {
+                                        Toast.makeText(getContext(), "There is no data", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
                     break;
             }
         } else {

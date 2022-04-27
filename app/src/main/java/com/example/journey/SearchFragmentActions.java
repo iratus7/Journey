@@ -32,7 +32,7 @@ public class SearchFragmentActions extends Fragment {
         searchSelectionList.add("Top 5 cities having most offers from travel agencies");
         searchSelectionList.add("Top 5 most used hotels");
         searchSelectionList.add("Top 5 Customers");
-        searchSelectionList.add("Top 5 prices");
+        searchSelectionList.add("Top 5 most used travel packages");
         ArrayAdapter<String> searchSelectionAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, searchSelectionList);
         listViewSearchAction.setAdapter(searchSelectionAdapter);
         listViewSearchAction.setSelection(0);

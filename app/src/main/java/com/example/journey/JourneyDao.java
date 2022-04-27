@@ -93,5 +93,8 @@ public interface JourneyDao {
 
     @Query("SELECT TripCityCoordinates FROM Trips WHERE TripCity = :city")
     String getCoordinatesByCity(String city);
+
+    @Query("SELECT  (Trips.TripCity|| ', ' ||TAgency.AgencyName|| ', ' ||Packages.PackageStartDate|| ', ' ||Packages.PackagePrice)||'€' AS RESULT FROM Packages,Trips,TAgency WHERE( Trips.Tid = Packages.TId AND TAgency.AgencyId = Packages.TAId AND Packages.PackageId = :id)")
+    String getPacketById(int id);
 }
 
