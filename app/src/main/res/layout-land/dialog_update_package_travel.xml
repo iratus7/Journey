@@ -2,48 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="8dp">
+    android:orientation="horizontal"
+    android:layout_margin="8dp"
+    android:weightSum="2">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <Spinner
+        android:id="@+id/SpinnerAId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp" />
+
+    <Spinner
+        android:id="@+id/SpinnerTId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edit_TextTCity"
-        android:hint="@string/enter_city"
+        android:id="@+id/edit_TextPDate"
+        android:hint="@string/give_start_date"
         android:padding="12dp"
         android:lines="2"
         android:gravity="top"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edit_TextTCountry"
-        android:hint="@string/enter_country"
+        android:id="@+id/edit_TextPPrice"
+        android:hint="@string/give_price"
         android:padding="12dp"
         android:lines="2"
         android:gravity="top"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_TextTDuration"
-        android:hint="@string/enter_duration"
-        android:padding="12dp"
-        android:lines="2"
-        android:gravity="top"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_TextTType"
-        android:hint="@string/enter_type"
-        android:padding="12dp"
-        android:lines="2"
-        android:gravity="top"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_TextTCoordinates"
-        android:hint="@string/enter_coordinates"
-        android:padding="12dp"
-        android:lines="2"
-        android:gravity="top"/>
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
     <Button
         android:id="@+id/bt_update"
@@ -58,4 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="CANCEL" />
+
+        </LinearLayout>
+
 </LinearLayout>
