@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/cardview_light_background"
-        android:listSelector="@android:color/transparent"/>
+        android:listSelector="@android:color/transparent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

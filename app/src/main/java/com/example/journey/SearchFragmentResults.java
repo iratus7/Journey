@@ -146,6 +146,8 @@ public class SearchFragmentResults extends Fragment {
         }
         ArrayAdapter<String> searchResultsAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, searchResultsList);
         listViewSearchResults.setAdapter(searchResultsAdapter);
+        listViewSearchResults.setBackgroundResource(R.drawable.customshape);
+
         return view;
     }
 
