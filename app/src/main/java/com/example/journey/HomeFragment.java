@@ -1,5 +1,6 @@
 package com.example.journey;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,14 @@ public class HomeFragment extends Fragment {
         listViewHome.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3) {
+
+                for(int a = 0; a < arg0.getChildCount(); a++)
+                {
+                    arg0.getChildAt(a).setBackgroundColor(Color.TRANSPARENT);
+                }
+
+                v.setBackgroundColor(Color.WHITE);
+
                 Bundle bundle = new Bundle();
                 String[] selectedCity = tripsList.get(position).split(",");
                 bundle.putString("SelectedCity", selectedCity[0]);

@@ -27,6 +27,7 @@
         android:hint="@string/give_name"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:textColorHint="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/editTextHotel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -40,6 +41,7 @@
         android:hint="@string/give_hotel"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:textColorHint="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/spinnerPackageId"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextCustomerName" />
@@ -59,7 +61,7 @@
         android:id="@+id/buttonClear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CLEAR"
+        android:text="@string/clear"
         android:layout_marginTop="8dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/buttonAdd"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="INSERT"
+        android:text="@string/insert"
         app:layout_constraintEnd_toStartOf="@+id/buttonClear"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

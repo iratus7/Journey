@@ -1,5 +1,6 @@
 package com.example.journey;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,14 @@ public class SearchFragmentActions extends Fragment {
         listViewSearchAction.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3) {
+
+                for(int a = 0; a < arg0.getChildCount(); a++)
+                {
+                    arg0.getChildAt(a).setBackgroundColor(Color.TRANSPARENT);
+                }
+
+                v.setBackgroundColor(Color.WHITE);
+
                 Bundle bundle = new Bundle();
                 bundle.putInt("position", position);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

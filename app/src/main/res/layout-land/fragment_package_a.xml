@@ -95,13 +95,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="INSERT" />
+            android:text="@string/insert"
+            />
             <Button
                 android:id="@+id/buttonClear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="CLEAR" />
+                android:text="@string/clear"
+                />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

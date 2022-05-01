@@ -18,5 +18,9 @@
     <string name="give_package">Give Package</string>
     <string name="give_hotel">Give Hotel</string>
     <string name="give_name">Give Name</string>
+    <string name="trip_management">TRIP MANAGEMENT</string>
+    <string name="insert">INSERT</string>
+    <string name="clear">CLEAR</string>
+    <string name="enter_days">Enter Days</string>
 
 </resources>
