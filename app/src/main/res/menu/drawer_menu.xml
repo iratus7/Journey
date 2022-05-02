@@ -29,9 +29,4 @@
             android:title="@string/search" />
     </group>
 
-    <!--<item android:title="Online">-->
-    <!--    <menu>-->
-
-    <!--    </menu>-->
-    <!--</item>-->
 </menu>
