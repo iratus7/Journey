@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         db= FirebaseFirestore.getInstance();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Home"); //default toolbar text
 
         drawer=findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -58,26 +59,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new HomeFragment()).commit();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new MapsFragment()).commit();
+                //test
+                getSupportActionBar().setTitle("Home");
                 break;
             case R.id.nav_trip:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new TripFragmentActions()).commit();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new TripFragmentResults()).commit();
+                //test
+                getSupportActionBar().setTitle("Trip");
                 break;
             case R.id.nav_travelagency:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new TravelAgencyFragmentActions()).commit();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new TravelAgencyFragmentResults()).commit();
+                getSupportActionBar().setTitle("Travel Agency");
                 break;
             case R.id.nav_packets:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new PackageFragmentActions()).commit();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new PackageFragmentResults()).commit();
+                getSupportActionBar().setTitle("Packets");
                 break;
             case R.id.nav_customers:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new CustomersFragmentActions()).commit();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new CustomersFragmentResults()).commit();
+                getSupportActionBar().setTitle("Customers");
                 break;
             case R.id.nav_search:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerAction, new SearchFragmentActions()).commit();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerResults, new SearchFragmentResults()).commit();
+                getSupportActionBar().setTitle("Search");
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
