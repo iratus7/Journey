@@ -1,4 +1,4 @@
-![image](https://github.com/iratus7/Journey/assets/2788154/69fc3883-2e43-4859-986c-8131d45be760)# Journey
+# Journey
 Journey App Android.
 Check in the about section for a video demo of the App
 
